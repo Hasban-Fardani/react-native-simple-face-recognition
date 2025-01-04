@@ -5,17 +5,31 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useTensorflowLiteModel } from '@/stores/useTensorflowLiteModel';
+import { loadTensorflowModel } from 'react-native-fast-tflite';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const { model, setModel } = useTensorflowLiteModel();
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  useEffect(() => {
+    if (model == null) {
+      setTimeout(async () => {
+        if (!model) {
+          const model = await loadTensorflowModel(
+            require('@/assets/models/mobile_face_net.tflite')
+          )
+          setModel(model);
+        }
+      }, 0);
+    }
+  }, []);
 
   useEffect(() => {
     if (loaded) {
