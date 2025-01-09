@@ -99,7 +99,7 @@ const FaceRecognition = () => {
     const newEmbeddings = Object.values(faceData[0]);
     // console.log(embeddings)
     const similarity = consineSimilarity(embeddings, newEmbeddings);
-    // console.log('similarity: ', similarity);
+    console.log('similarity: ', similarity);
     setConsineSimilarityValueJS(similarity * 100);
   }, [model]);
 
@@ -121,19 +121,11 @@ const FaceRecognition = () => {
         </View>
       </Modal>
 
-      {consineSimilarityValue > 50 && faceDetected > 0 ? (
+      { faceDetected > 0 && (
         <Modal visible={faceDetected > 0} transparent>
           <View style={styles.modalOverlay}>
             <View style={{}}>
               <Text >Kecocokan wajah: {consineSimilarityValue.toPrecision(2)} %</Text>
-            </View>
-          </View>
-        </Modal>
-      ) : (
-        <Modal visible={faceDetected > 0} transparent>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text>Kecocokan kurang dari 50%</Text>
             </View>
           </View>
         </Modal>
@@ -182,7 +174,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   modalItem: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "transparent",
   },
   modalOverlay: {
@@ -191,7 +183,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 60,
-    // paddingBottom: 60,
   },
   modalContent: {
     backgroundColor: "white",
@@ -210,7 +201,5 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // position: 'absolute',
-    // top: 0,
   }
 });

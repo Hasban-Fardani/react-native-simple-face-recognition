@@ -84,7 +84,7 @@ const CameraSection = () => {
 
       const firsFace = faces[0];
       if (!firsFace) {
-        console.log("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ gada wajah ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
+        // console.log("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ gada wajah ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
         return;
       }
 
@@ -144,6 +144,16 @@ const CameraSection = () => {
     return (
       <SafeAreaView style={styles.container}>
         <Image source={{ uri: image.value }} style={styles.capturedImage} />
+        <TouchableOpacity
+          style={{ width: 50, height: 50, opacity: !isCameraActive ? 1 : 0 }}
+          onPress={() => {
+            image.value = null;
+            setIsCameraActiveJS(true);
+            setOnRecognizeJS(false);
+          }}
+        >
+          <Text>Hapus gambar</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }

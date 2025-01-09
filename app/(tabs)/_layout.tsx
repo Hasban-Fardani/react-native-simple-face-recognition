@@ -36,6 +36,13 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: 'Bandingin',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="data"
+        options={{
+          title: 'Liat data yang kesimpen',
           // tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
